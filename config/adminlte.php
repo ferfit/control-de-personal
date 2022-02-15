@@ -248,8 +248,14 @@ return [
         ], */
         [
             'text'        => 'Usuarios',
-            'url'         => 'admin/pages',
+            'url'         => 'usuarios',
             'icon'        => 'fas fa-users',
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Empleados',
+            'url'         => 'empleados',
+            'icon'        => 'fas fa-user-tie',
             'label_color' => 'success',
         ],
         /* ['header' => 'account_settings'],

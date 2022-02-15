@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -27,3 +29,4 @@ require __DIR__.'/auth.php';
 
 
 Route::resource('usuarios', UserController::class)->names('usuarios');
+Route::resource('empleados', EmpleadoController::class)->names('empleados');

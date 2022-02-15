@@ -11,7 +11,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Bordered Table</h3>
+                    <h3 class="card-title">Usuarios</h3>
                 </div>
 
                 <div class="card-body">
@@ -26,17 +26,14 @@
                         </thead>
 
                         <tbody>
-                            @foreach ($usuarios as $usuario )
-
+                            @foreach ($usuarios as $usuario)
+                                <tr>
+                                    <td>{{ $usuario->id }}</td>
+                                    <td>{{ $usuario->name }}</td>
+                                    <td> {{ $usuario->email }}</td>
+                                    <td><span class="badge bg-danger">55%</span></td>
+                                </tr>
                             @endforeach
-                            <tr>
-                                <td>{{$usuario->id}}</td>
-                                <td>{{$usuario->name}}</td>
-                                <td> {{$usuario->email}}</td>
-                                <td><span class="badge bg-danger">55%</span></td>
-                            </tr>
-
-
                         </tbody>
                     </table>
                 </div>
