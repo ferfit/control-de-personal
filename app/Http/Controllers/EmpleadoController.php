@@ -61,38 +61,46 @@ class EmpleadoController extends Controller
         ]);
 
         //obtenemos la ruta de la imagen y la almacenamos con el metodo "store"
-        $ruta_imagenDniFrente = $request['imagenDniFrente']->store('imagenes-dni', 'public');
-        $ruta_imagenDniDorso = $request['imagenDniDorso']->store('imagenes-dni', 'public');
+        if(request('imagenDniFrente')){
+            $ruta_imagenDniFrente = $request['imagenDniFrente']->store('imagenes-dni', 'public');
+        } else {
+            $ruta_imagenDniFrente = null;
+        }
 
-        //return $ruta_imagenDniDorso;die();
+        if(request('imagenDniDorso')){
+            $ruta_imagenDniDorso = $request['imagenDniDorso']->store('imagenes-dni', 'public');
+        } else {
+            $ruta_imagenDniDorso = null;
+        }
 
-        /* try { */
-        //Creacion
-        Empleado::create([
-            'nombre' => $data['nombre'],
-            'apellido' => $data['apellido'],
-            'lugarDeNacimiento' => $data['lugarDeNacimiento'],
-            'fechaDeNacimiento' => $data['fechaDeNacimiento'],
-            'estadoCivil' => $data['estadoCivil'],
-            'nacionalidad' => $data['nacionalidad'],
-            'domicilio' => $data['domicilio'],
-            'dni' => $data['dni'],
-            'imagenDniFrente' => $ruta_imagenDniFrente,
-            'imagenDniDorso' => $ruta_imagenDniDorso,
-            'email' => $data['email'],
-            'telefonoParticular' => $data['telefonoParticular'],
-            'telefonoDeContacto' => $data['telefonoDeContacto'],
-            'apellidoMaterno' => $data['apellidoMaterno'],
-            'apellidoPaterno' => $data['apellidoPaterno'],
-            'conjugeApellidoNombre' => $data['conjugeApellidoNombre'],
-            'conjugeDni' => $data['conjugeDni']
-        ]);
 
-        //retorno
-        return redirect()->route('empleados.index')->with('Creado', 'El empleado se creó exitosamente.');
-        /* } catch (\Throwable $th) {
+        try {
+            //Creacion
+            Empleado::create([
+                'nombre' => $data['nombre'],
+                'apellido' => $data['apellido'],
+                'lugarDeNacimiento' => $data['lugarDeNacimiento'],
+                'fechaDeNacimiento' => $data['fechaDeNacimiento'],
+                'estadoCivil' => $data['estadoCivil'],
+                'nacionalidad' => $data['nacionalidad'],
+                'domicilio' => $data['domicilio'],
+                'dni' => $data['dni'],
+                'imagenDniFrente' => $ruta_imagenDniFrente,
+                'imagenDniDorso' => $ruta_imagenDniDorso,
+                'email' => $data['email'],
+                'telefonoParticular' => $data['telefonoParticular'],
+                'telefonoDeContacto' => $data['telefonoDeContacto'],
+                'apellidoMaterno' => $data['apellidoMaterno'],
+                'apellidoPaterno' => $data['apellidoPaterno'],
+                'conjugeApellidoNombre' => $data['conjugeApellidoNombre'],
+                'conjugeDni' => $data['conjugeDni']
+            ]);
+
+            //retorno
+            return redirect()->route('empleados.index')->with('Creado', 'El empleado se creó exitosamente.');
+        } catch (\Throwable $th) {
             return redirect()->route('empleados.index')->with('Error', 'Hubo un problema al crear el empleado, vuelta a intentarlo.');
-        } */
+        }
     }
 
     /**
@@ -103,7 +111,7 @@ class EmpleadoController extends Controller
      */
     public function show(Empleado $empleado)
     {
-        //
+        return view('admin.empleados.show',compact('empleado'));
     }
 
     /**
@@ -152,7 +160,6 @@ class EmpleadoController extends Controller
         if (request('imagenDniFrente')) {
 
             $ruta_imagenDniFrente = $request['imagenDniFrente']->store('imagenes-dni', 'public');
-
         } else if (request('imagen_actual_frente')) {
 
             $ruta_imagenDniFrente = $request['imagen_actual_frente'];
@@ -165,45 +172,40 @@ class EmpleadoController extends Controller
         if (request('imagenDniDorso')) {
 
             $ruta_imagenDniDorso = $request['imagenDniDorso']->store('imagenes-dni', 'public');
-
         } else if (request('imagen_actual_dorso')) {
 
             $ruta_imagenDniDorso = $request['imagen_actual_dorso'];
-
         } else {
 
             $ruta_imagenDniDorso = null;
         }
 
 
-        /* try { */
-        //Actualiza datos
-        $empleado->nombre =  $data['nombre'];
-        $empleado->apellido = $data['apellido'];
-        $empleado->lugarDeNacimiento = $data['lugarDeNacimiento'];
-        $empleado->fechaDeNacimiento = $data['fechaDeNacimiento'];
-        $empleado->estadoCivil = $data['estadoCivil'];
-        $empleado->nacionalidad = $data['nacionalidad'];
-        $empleado->domicilio = $data['domicilio'];
-        $empleado->dni = $data['dni'];
-        $empleado->imagenDniFrente = $ruta_imagenDniFrente;
-        $empleado->imagenDniDorso = $ruta_imagenDniDorso;
-        $empleado->email = $data['email'];
-        $empleado->telefonoParticular = $data['telefonoParticular'];
-        $empleado->telefonoDeContacto = $data['telefonoDeContacto'];
-        $empleado->apellidoMaterno = $data['apellidoMaterno'];
-        $empleado->apellidoPaterno = $data['apellidoPaterno'];
-        $empleado->conjugeApellidoNombre = $data['conjugeApellidoNombre'];
-        $empleado->conjugeDni = $data['conjugeDni'];
-        $empleado->save();
+        try {
+            //Actualiza datos
+            $empleado->nombre =  $data['nombre'];
+            $empleado->apellido = $data['apellido'];
+            $empleado->lugarDeNacimiento = $data['lugarDeNacimiento'];
+            $empleado->fechaDeNacimiento = $data['fechaDeNacimiento'];
+            $empleado->estadoCivil = $data['estadoCivil'];
+            $empleado->nacionalidad = $data['nacionalidad'];
+            $empleado->domicilio = $data['domicilio'];
+            $empleado->dni = $data['dni'];
+            $empleado->imagenDniFrente = $ruta_imagenDniFrente;
+            $empleado->imagenDniDorso = $ruta_imagenDniDorso;
+            $empleado->email = $data['email'];
+            $empleado->telefonoParticular = $data['telefonoParticular'];
+            $empleado->telefonoDeContacto = $data['telefonoDeContacto'];
+            $empleado->apellidoMaterno = $data['apellidoMaterno'];
+            $empleado->apellidoPaterno = $data['apellidoPaterno'];
+            $empleado->conjugeApellidoNombre = $data['conjugeApellidoNombre'];
+            $empleado->conjugeDni = $data['conjugeDni'];
+            $empleado->save();
 
-        return redirect()->route('empleados.index')->with('Actualizado', 'Datos del empleado actualizados exitosamente.');
-
-    /* } catch (\Throwable $th) {
-        return redirect()->route('datos.index')->with('Error', 'Hubo un problema al actualizar los datos del empleado, vuelva a intentarlo.');
-    } */
-
-
+            return redirect()->route('empleados.index')->with('Actualizado', 'Datos del empleado actualizados exitosamente.');
+        } catch (\Throwable $th) {
+            return redirect()->route('empleados.index')->with('Error', 'Hubo un problema al actualizar los datos del empleado, vuelva a intentarlo.');
+        }
     }
 
     /**
@@ -214,6 +216,12 @@ class EmpleadoController extends Controller
      */
     public function destroy(Empleado $empleado)
     {
-        //
+        try {
+
+            $empleado->delete();
+            return redirect()->route('empleados.index')->with('Borrado', 'Empleado borrado exitosamente.');
+        } catch (\Throwable $th) {
+            return redirect()->route('empleados.index')->with('Error', 'Hubo un problema, vuelta a intentarlo.');
+        }
     }
 }
