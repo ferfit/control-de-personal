@@ -23,15 +23,15 @@ class CreateEmpleadosTable extends Migration
             $table->string('nacionalidad');
             $table->string('domicilio');
             $table->string('dni');
-            $table->string('imagenDniFrente');
-            $table->string('imagenDniDorso');
+            $table->string('imagenDniFrente')->nullable();
+            $table->string('imagenDniDorso')->nullable();
             $table->string('email');
             $table->string('telefonoParticular');
-            $table->string('telefonoDeContacto');
-            $table->string('apellidoMaterno');
-            $table->string('apellidoPaterno');
-            $table->string('conjugeApellidoNombre');
-            $table->string('conjugeDni');
+            $table->string('telefonoDeContacto')->nullable();
+            $table->string('apellidoMaterno')->nullable();
+            $table->string('apellidoPaterno')->nullable();
+            $table->string('conjugeApellidoNombre')->nullable();
+            $table->string('conjugeDni')->nullable();
             $table->timestamps();
         });
     }
@@ -46,3 +46,5 @@ class CreateEmpleadosTable extends Migration
         Schema::dropIfExists('empleados');
     }
 }
+
+

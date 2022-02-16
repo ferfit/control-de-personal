@@ -23,44 +23,38 @@
                                 <th>Apellido</th>
                                 <th>Dni</th>
                                 <th>Email</th>
-                                <th>Email</th>
+                                <th>Teléfono Part</th>
                                 <th style="width:50px;">Acciones</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            {{-- @foreach ($usuarios as $usuario)
+                            @foreach ($empleados as $empleado)
                                 <tr>
-                                    <td>{{ $usuario->name }}</td>
-                                    <td> {{ $usuario->email }}</td>
-                                    <td><span class="badge bg-danger">55%</span></td>
-                                </tr>
-                            @endforeach --}}
-                            <tr>
-                                <td>....</td>
-                                <td> ....</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-info">Action</button>
+                                    <td>{{ $empleado->nombre }}</td>
+                                    <td> {{ $empleado->apellido }}</td>
+                                    <td> {{ $empleado->dni }}</td>
+                                    <td> {{ $empleado->email }}</td>
+                                    <td> {{ $empleado->telefonoParticular }}</td>
+                                    <td><div class="btn-group">
+                                        <a href="{{ route('empleados.edit',$empleado)}}" class="btn btn-info">Ver</a>
                                         <button type="button" class="btn btn-info dropdown-toggle dropdown-icon"
                                             data-toggle="dropdown" aria-expanded="false">
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu" role="menu" style="">
-                                            <a class="dropdown-item" href="#">Ver</a>
-                                            <a class="dropdown-item" href="#">Modificar</a>
+                                            <a class="dropdown-item" href="{{ route('empleados.edit',$empleado)}}">Ver</a>
+                                            <a class="dropdown-item" href="{{ route('empleados.edit',$empleado)}}">Modificar</a>
                                             <a class="dropdown-item" href="#">Hijos</a>
                                             <div class="dropdown-divider"></div>
                                             <div class="p-2 ">
                                                 <a class="dropdown-item bg-danger rounded" href="#">Eliminar</a>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </div></td>
+                                </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
