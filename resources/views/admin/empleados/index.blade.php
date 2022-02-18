@@ -40,7 +40,7 @@
                                     <td>
                                         <div class="btn-group">
                                             <a href="{{ route('empleados.show', $empleado) }}"
-                                                class="btn btn-info">Ver</a>
+                                                class="btn btn-primary">Ver</a>
                                             <button type="button" class="btn btn-info dropdown-toggle dropdown-icon"
                                                 data-toggle="dropdown" aria-expanded="false">
                                                 <span class="sr-only">Toggle Dropdown</span>
@@ -73,13 +73,7 @@
                 </div>
 
                 <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item"><a class="page-link" href="#">«</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">»</a></li>
-                    </ul>
+                    {{$empleados->links()}}
                 </div>
             </div>
         </div>
