@@ -7,12 +7,12 @@
 @stop
 
 @section('content')
-    <div class="container-fluid p-5">
+    <div class="container p-5">
         <div class="col-12">
             <div class="card ">
                 <div class="card-header d-flex justify-content-start align-items-center ">
-                    <h3 class="card-title">Empleados</h3>
-                    <a href="{{ route('empleados.create') }}" class="btn btn-success ml-2"><i
+                    <h3 class="card-title">Hijos de {{$empleado->nombre}} {{$empleado->apellido}}</h3>
+                    <a href="{{ route('hijos.create',$empleado)}}" class="btn btn-success ml-2"><i
                             class="far fa-plus-square mr-1"></i>Crear</a>
                 </div>
 
@@ -23,37 +23,32 @@
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Dni</th>
-                                <th>Email</th>
-                                <th>Teléfono Part</th>
                                 <th style="width:50px;">Acciones</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            @foreach ($empleados as $empleado)
+                            @foreach ($hijos as $hijo)
                                 <tr>
-                                    <td>{{ $empleado->nombre }}</td>
-                                    <td> {{ $empleado->apellido }}</td>
-                                    <td> {{ $empleado->dni }}</td>
-                                    <td> {{ $empleado->email }}</td>
-                                    <td> {{ $empleado->telefonoParticular }}</td>
+                                    <td>{{ $hijo->nombre }}</td>
+                                    <td> {{ $hijo->apellido }}</td>
+                                    <td> {{ $hijo->dni }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{ route('empleados.show', $empleado) }}"
-                                                class="btn btn-primary">Ver</a>
+                                            <a href="{{ route('hijos.edit',[$hijo,$empleado])}}"
+                                                class="btn btn-primary">Modificar</a>
                                             <button type="button" class="btn btn-info dropdown-toggle dropdown-icon"
                                                 data-toggle="dropdown" aria-expanded="false">
                                                 <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <div class="dropdown-menu" role="menu" style="">
+
                                                 <a class="dropdown-item"
-                                                    href="{{ route('empleados.show', $empleado) }}">Ver</a>
-                                                <a class="dropdown-item"
-                                                    href="{{ route('empleados.edit', $empleado) }}">Modificar</a>
-                                                <a class="dropdown-item" href="{{ route('hijos.index',$empleado) }}">Hijos</a>
+                                                    href="{{ route('hijos.edit',[$hijo,$empleado])}}">Modificar</a>
+
                                                 <div class="dropdown-divider"></div>
 
-                                                <form action="{{ route('empleados.destroy', $empleado) }}" method="POST"
+                                                <form action="{{ route('hijos.destroy',[$hijo,$empleado])}}" method="POST"
                                                     class="formulario-eliminar w-100 p-2">
                                                     @csrf
                                                     @method('DELETE')
@@ -71,9 +66,8 @@
                         </tbody>
                     </table>
                 </div>
-
                 <div class="card-footer clearfix">
-                    {{$empleados->links()}}
+                    <a href="{{ route('empleados.index')}}" class="btn btn-secondary">Volver</a>
                 </div>
             </div>
         </div>

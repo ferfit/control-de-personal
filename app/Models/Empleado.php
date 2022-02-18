@@ -28,4 +28,9 @@ class Empleado extends Model
         'conjugeApellidoNombre',
         'conjugeDni'
     ];
+
+
+    public function hijos(){
+        return $this->hasMany(Hijo::class);
+    }
 }
