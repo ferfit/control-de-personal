@@ -7,45 +7,69 @@
 @stop
 
 @section('content')
-    <div class="container-fluid p-5">
+    <div class="container-fluid pt-5 p-md-5">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Usuarios</h3>
+                    <a href="{{ route('usuarios.create') }}" class="btn btn-success ml-2"><i
+                            class="far fa-plus-square mr-1"></i>Crear</a>
                 </div>
 
                 <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th style="width: 10px">#</th>
-                                <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($usuarios as $usuario)
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
-                                    <td>{{ $usuario->id }}</td>
-                                    <td>{{ $usuario->name }}</td>
-                                    <td> {{ $usuario->email }}</td>
-                                    <td><span class="badge bg-danger">55%</span></td>
+                                    <th style="width: 10px">#</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th style="width: 10px">Acciones</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($usuarios as $usuario)
+                                    <tr>
+                                        <td>{{ $usuario->id }}</td>
+                                        <td>{{ $usuario->name }}</td>
+                                        <td> {{ $usuario->email }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="{{ route('usuarios.edit', $usuario) }}"
+                                                class="btn btn-primary">Editar</a>
+                                                <button type="button" class="btn btn-info dropdown-toggle dropdown-icon"
+                                                    data-toggle="dropdown" aria-expanded="false">
+                                                    <span class="sr-only"></span>
+                                                </button>
+                                                <div class="dropdown-menu" role="menu" style="">
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('usuarios.edit', $usuario) }}">Editar</a>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('password', $usuario) }}">Cambiar contraseña</a>
+                                                    <div class="dropdown-divider"></div>
+
+                                                    <form action="{{ route('usuarios.destroy', $usuario) }}" method="POST"
+                                                        class="formulario-eliminar w-100 p-2">
+                                                        @csrf
+                                                        @method('DELETE')
+
+                                                        <button type="submit" class="btn btn-danger w-100">
+                                                            Eliminar
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item"><a class="page-link" href="#">«</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">»</a></li>
-                    </ul>
+                    {{ $usuarios->links() }}
                 </div>
             </div>
         </div>
@@ -57,5 +81,7 @@
 @stop
 
 @section('js')
+
+    @include('includes.alertas')
 
 @stop

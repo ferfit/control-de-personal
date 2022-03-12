@@ -14,7 +14,7 @@
             </div>
 
 
-            <form method="POST" action="{{ route('empleados.update',$empleado)}}" enctype="multipart/form-data">
+            <form method="POST" id="formulario" action="{{ route('empleados.update',$empleado)}}" enctype="multipart/form-data">
                 @csrf
                 @method('put')
 
@@ -238,7 +238,7 @@
                 </div>
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" id="btnForm" class="btn btn-primary">Guardar</button>
                     <a href="{{route('empleados.index')}}" class="btn btn-secondary">Volver</a>
                 </div>
             </form>
@@ -250,5 +250,5 @@
 @stop
 
 @section('js')
-
+    @include('includes.btnForm')
 @stop

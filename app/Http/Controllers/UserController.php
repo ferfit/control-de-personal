@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 
 class UserController extends Controller
@@ -16,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $usuarios = User::all();
+        $usuarios = User::paginate(2);
         return view('admin.usuarios.index',compact('usuarios'));
     }
 
@@ -27,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.usuarios.create');
     }
 
     /**
@@ -38,7 +40,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validación
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+
+
+        try {
+            //Crear empleado
+            User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password'=>hash::make($data['password'])
+            ]);
+
+            //Redirección
+            return redirect()->route('usuarios.index')->with('Creado', 'Usuario creado exitosamente.');
+
+        } catch (\Throwable $th) {
+            return redirect()->route('usuarios.index')->with('Error', 'Hubo un problema al crear el usuario, vuelta a intentarlo.');
+        }
     }
 
     /**
@@ -58,9 +82,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $usuario)
     {
-        //
+        return view('admin.usuarios.edit',compact('usuario'));
     }
 
     /**
@@ -70,9 +94,28 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $usuario)
     {
-        //
+        //Validación
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => 'required'
+        ]);
+
+
+
+        try {
+            //Actualiza usuario
+            $usuario->name = $data['name'];
+            $usuario->email = $data['email'];
+            $usuario->save();
+
+            //Redirección
+            return redirect()->route('usuarios.index')->with('Actualizado', 'El usuario se actualizó exitosamente.');
+
+        } catch (\Throwable $th) {
+            return redirect()->route('usuarios.index')->with('Error', 'Hubo un problema al actualizar el usuario, vuelta a intentarlo.');
+        }
     }
 
     /**
@@ -81,8 +124,44 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $usuario)
     {
-        //
+        try {
+            $usuario->delete();
+
+            return redirect()->route('usuarios.index')->with('Borrado','El usuario se borró exitosamente.');
+
+        } catch (\Throwable $th) {
+
+            return redirect()->route('usuarios.index')->with('Error','Hubo un problema, vuelva a intentarlo.');
+        }
+    }
+
+
+    public function password(User $usuario){
+        return view('admin.usuarios.password',compact('usuario'));
+
+    }
+
+    public function updatePassword(Request $request, User $usuario)
+    {
+        //Validación
+        $data = request()->validate([
+            'password' => 'required'
+        ]);
+
+
+
+        try {
+            //Actualiza usuario
+            $usuario->password = hash::make( $data['password'])   ;
+            $usuario->save();
+
+            //Redirección
+            return redirect()->route('usuarios.index')->with('Actualizado', 'La contraseña se actualizó exitosamente.');
+
+        } catch (\Throwable $th) {
+            return redirect()->route('usuarios.index')->with('Error', 'Hubo un problema al actualizar la contraseña, vuelta a intentarlo.');
+        }
     }
 }
