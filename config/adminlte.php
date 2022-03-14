@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -225,38 +226,29 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
-        /* [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
-        ], */
 
-        // Sidebar items:
-        /* [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ], */
+            'text'        => 'Dashboard',
+            'url'         => 'dashboard',
+            'icon'        => 'fas fa-tachometer-alt',
+            'label_color' => 'success',
+            'can' => ['administrador','socio']
+
+        ],
         [
             'text'        => 'Usuarios',
             'url'         => 'usuarios',
             'icon'        => 'fas fa-users',
             'label_color' => 'success',
+            'can' => 'administrador'
+
         ],
         [
             'text'        => 'Empleados',
             'url'         => 'empleados',
             'icon'        => 'fas fa-user-tie',
             'label_color' => 'success',
+            'can' => ['administrador','socio']
         ],
         /* ['header' => 'account_settings'],
         [

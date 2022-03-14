@@ -18,22 +18,27 @@ class UsuarioSeeder extends Seeder
         $user = User::create([
             'name' => 'fernando',
             'email' => 'ferfit16@gmail.com',
-            'password' => hash::make('laesquina')
+            'password' => hash::make('laesquina'),
+            'rol' => 'administrador'
         ]);
         $user = User::create([
             'name' => 'Victoria',
-            'email' => 'vicky@gmail.com',
-            'password' => hash::make('laesquina')
+            'email' => 'socio@correo.com',
+            'password' => hash::make('laesquina'),
+            'rol' => 'socio',
+
         ]);
         $user = User::create([
             'name' => 'Sofia',
-            'email' => 'sofia@gmail.com',
-            'password' => hash::make('laesquina')
+            'email' => 'empleado@gmail.com',
+            'password' => hash::make('laesquina'),
+            'rol' => 'empleado'
         ]);
         $user = User::create([
             'name' => 'Tobi',
             'email' => 'tobi@gmail.com',
-            'password' => hash::make('laesquina')
+            'password' => hash::make('laesquina'),
+            'rol' => 'empleado'
         ]);
     }
 }
