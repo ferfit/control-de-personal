@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Image;
+use Illuminate\Support\Str;
 
 class EmpleadoController extends Controller
 {
@@ -61,15 +63,45 @@ class EmpleadoController extends Controller
             'conjugeDni' => 'nullable',
         ]);
 
+
+
+
+
         //obtenemos la ruta de la imagen y la almacenamos con el metodo "store"
         if(request('imagenDniFrente')){
-            $ruta_imagenDniFrente = $request['imagenDniFrente']->store('imagenes-dni', 'public');
+
+            $nombre = Str::random(20).$request->file('imagenDniFrente')->getClientOriginalName();
+
+            $ruta = storage_path().'\app\public\imagenes-dni/'.$nombre;
+
+           Image::make($data['imagenDniFrente'])
+            ->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save($ruta);
+
+            $ruta_imagenDniFrente = '\imagenes-dni/'.$nombre;
+
         } else {
             $ruta_imagenDniFrente = null;
         }
 
         if(request('imagenDniDorso')){
-            $ruta_imagenDniDorso = $request['imagenDniDorso']->store('imagenes-dni', 'public');
+            //$ruta_imagenDniDorso = $request['imagenDniDorso']->store('imagenes-dni', 'public');
+
+            $nombre = Str::random(20).$request->file('imagenDniDorso')->getClientOriginalName();
+
+            $ruta = storage_path().'\app\public\imagenes-dni/'.$nombre;
+
+           Image::make($data['imagenDniDorso'])
+            ->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save($ruta);
+
+            $ruta_imagenDniDorso = '\imagenes-dni/'.$nombre;
+
+
         } else {
             $ruta_imagenDniDorso = null;
         }
@@ -164,7 +196,18 @@ class EmpleadoController extends Controller
             $url = 'public/'.$empleado->imagenDniFrente;
             Storage::delete($url);
             //Carga nueva imagen
-            $ruta_imagenDniFrente = $request['imagenDniFrente']->store('imagenes-dni', 'public');
+            $nombre = Str::random(20).$request->file('imagenDniFrente')->getClientOriginalName();
+
+            $ruta = storage_path().'\app\public\imagenes-dni/'.$nombre;
+
+           Image::make($data['imagenDniFrente'])
+            ->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save($ruta);
+
+            $ruta_imagenDniFrente = '\imagenes-dni/'.$nombre;
+
 
         } else if (request('imagen_actual_frente')) {
 
@@ -180,7 +223,18 @@ class EmpleadoController extends Controller
             $url = 'public/'.$empleado->imagenDniDorso;
             Storage::delete($url);
             //Carga nueva imagen
-            $ruta_imagenDniDorso = $request['imagenDniDorso']->store('imagenes-dni', 'public');
+            $nombre = Str::random(20).$request->file('imagenDniDorso')->getClientOriginalName();
+
+            $ruta = storage_path().'\app\public\imagenes-dni/'.$nombre;
+
+           Image::make($data['imagenDniDorso'])
+            ->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save($ruta);
+
+            $ruta_imagenDniDorso = '\imagenes-dni/'.$nombre;
+
         } else if (request('imagen_actual_dorso')) {
 
             $ruta_imagenDniDorso = $request['imagen_actual_dorso'];
