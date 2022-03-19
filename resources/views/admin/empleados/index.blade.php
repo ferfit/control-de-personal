@@ -18,7 +18,7 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered ">
+                        <table class="table table-bordered my-5 ">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -39,7 +39,7 @@
                                         <td> {{ $empleado->email }}</td>
                                         <td> {{ $empleado->telefonoDeContacto }}</td>
                                         <td>
-                                            <div class="btn-group">
+                                            <div class="btn-group index-2">
                                                 <a href="{{ route('empleados.show', $empleado) }}"
                                                     class="btn btn-primary">Ver</a>
                                                 <button type="button" class="btn btn-info dropdown-toggle dropdown-icon"

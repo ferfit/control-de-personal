@@ -227,6 +227,11 @@ class EmpleadoController extends Controller
     {
         try {
 
+            $urlFrente = 'public/'.$empleado->imagenDniFrente;
+            Storage::delete($urlFrente);
+            $urlDorso = 'public/'.$empleado->imagenDniDorso;
+            Storage::delete($urlDorso);
+
             $empleado->delete();
             return redirect()->route('empleados.index')->with('Borrado', 'Empleado borrado exitosamente.');
         } catch (\Throwable $th) {

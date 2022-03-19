@@ -18,7 +18,7 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered my-5">
                             <thead>
                                 <tr>
                                     <th style="width: 10px">#</th>
