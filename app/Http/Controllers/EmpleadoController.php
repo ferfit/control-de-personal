@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empleado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EmpleadoController extends Controller
 {
@@ -159,7 +160,12 @@ class EmpleadoController extends Controller
         //si existe una imagen frente
         if (request('imagenDniFrente')) {
 
+            //borra imagen anterior
+            $url = 'public/'.$empleado->imagenDniFrente;
+            Storage::delete($url);
+            //Carga nueva imagen
             $ruta_imagenDniFrente = $request['imagenDniFrente']->store('imagenes-dni', 'public');
+
         } else if (request('imagen_actual_frente')) {
 
             $ruta_imagenDniFrente = $request['imagen_actual_frente'];
@@ -170,7 +176,10 @@ class EmpleadoController extends Controller
 
         //si existe una imagen dorso
         if (request('imagenDniDorso')) {
-
+            //borra imagen anterior
+            $url = 'public/'.$empleado->imagenDniDorso;
+            Storage::delete($url);
+            //Carga nueva imagen
             $ruta_imagenDniDorso = $request['imagenDniDorso']->store('imagenes-dni', 'public');
         } else if (request('imagen_actual_dorso')) {
 
@@ -181,7 +190,7 @@ class EmpleadoController extends Controller
         }
 
 
-        try {
+         try {
             //Actualiza datos
             $empleado->nombre =  $data['nombre'];
             $empleado->apellido = $data['apellido'];
