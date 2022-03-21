@@ -44,7 +44,8 @@ class UserController extends Controller
         $data = request()->validate([
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'rol' => 'required'
         ]);
 
 
@@ -54,7 +55,8 @@ class UserController extends Controller
             User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'password'=>hash::make($data['password'])
+                'password'=>hash::make($data['password']),
+                'rol' => $data['rol']
             ]);
 
             //Redirección
@@ -99,7 +101,8 @@ class UserController extends Controller
         //Validación
         $data = request()->validate([
             'name' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'rol' => 'required'
         ]);
 
 
@@ -108,6 +111,7 @@ class UserController extends Controller
             //Actualiza usuario
             $usuario->name = $data['name'];
             $usuario->email = $data['email'];
+            $usuario->rol = $data['rol'];
             $usuario->save();
 
             //Redirección

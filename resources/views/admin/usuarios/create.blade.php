@@ -17,7 +17,7 @@
             <form method="POST" id="formulario" action="{{ route('usuarios.store') }}" novalidate>
                 @csrf
                 <div class="row">
-                    <div class="card-body col-12 col-md-4">
+                    <div class="card-body col-12 col-md-6">
                         <div class="form-group">
                             <label for="name">Nombre*</label>
                             <input type="text" autofocus name="name" class="form-control @error('name') is-invalid @enderror"
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     {{-- Email --}}
-                    <div class="card-body col-12 col-md-4">
+                    <div class="card-body col-12 col-md-6">
                         <div class="form-group">
                             <label for="email">Email*</label>
                             <input type="email" autofocus email="email" name="email"
@@ -44,13 +44,29 @@
                         </div>
                     </div>
                     {{-- contraseña --}}
-                    <div class="card-body col-12 col-md-4">
+                    <div class="card-body col-12 col-md-6">
                         <div class="form-group">
                             <label for="password">Contraseña*</label>
                             <input type="password" autofocus password="password" name="password"
                                 class="form-control @error('password') is-invalid @enderror" id="password"
                                 placeholder="Ingrese una contraseña" value="{{ old('password') }}">
                             @error('password')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    {{-- rol --}}
+                    <div class="card-body col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="rol">Perfil*</label>
+                            <select class="form-control" name="rol" id="">
+                                <option value="socio">socio</option>
+                                <option value="empleado">empleado</option>
+                                <option value="administrador">administrador</option>
+                            </select>
+                            @error('rol')
                                 <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

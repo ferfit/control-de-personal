@@ -20,7 +20,7 @@ class CreateHijosTable extends Migration
             $table->string('dni');
 
             $table->unsignedBigInteger('empleado_id');
-            $table->foreign('empleado_id')->references('id')->on('empleados');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
 
             $table->timestamps();
 

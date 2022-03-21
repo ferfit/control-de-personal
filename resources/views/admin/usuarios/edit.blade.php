@@ -18,7 +18,7 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="card-body col-12 col-md-6">
+                    <div class="card-body col-12 col-md-4">
                         <div class="form-group">
                             <label for="name">Nombre*</label>
                             <input type="text" autofocus name="name" class="form-control @error('name') is-invalid @enderror"
@@ -31,13 +31,46 @@
                         </div>
                     </div>
                     {{-- Email --}}
-                    <div class="card-body col-12 col-md-6">
+                    <div class="card-body col-12 col-md-4">
                         <div class="form-group">
                             <label for="email">Email*</label>
                             <input type="email" autofocus email="email" name="email"
                                 class="form-control @error('email') is-invalid @enderror" id="email"
                                 placeholder="Ingrese un nombre" value="{{ $usuario->email}}">
                             @error('email')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    {{-- rol --}}
+                    <div class="card-body col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="rol">Perfil*</label>
+                            <select class="form-control" name="rol" id="">
+
+                                <option value="{{$usuario->rol}}">{{$usuario->rol}}</option>
+
+                                @switch($usuario->rol)
+                                    @case('administrador')
+                                        <option value="socio">socio</option>
+                                        <option value="empleado">empleado</option>
+                                        @break
+                                    @case('socio')
+                                    <option value="empleado">empleado</option>
+                                    <option value="administrador">administrador</option>
+                                        @break
+                                    @case('empleado')
+                                    <option value="socio">socio</option>
+                                    <option value="administrador">administrador</option>
+                                        @break
+
+                                    @default
+
+                                @endswitch
+                            </select>
+                            @error('rol')
                                 <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

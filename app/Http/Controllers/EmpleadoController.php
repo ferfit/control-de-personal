@@ -72,7 +72,7 @@ class EmpleadoController extends Controller
 
             $nombre = Str::random(20).$request->file('imagenDniFrente')->getClientOriginalName();
 
-            $ruta = storage_path().'\app\public\imagenes-dni/'.$nombre;
+            $ruta = storage_path().'/app/public/imagenes-dni/'.$nombre;
 
            Image::make($data['imagenDniFrente'])
             ->resize(500, null, function ($constraint) {
@@ -91,7 +91,7 @@ class EmpleadoController extends Controller
 
             $nombre = Str::random(20).$request->file('imagenDniDorso')->getClientOriginalName();
 
-            $ruta = storage_path().'\app\public\imagenes-dni/'.$nombre;
+            $ruta = storage_path().'/app/public/imagenes-dni/'.$nombre;
 
            Image::make($data['imagenDniDorso'])
             ->resize(500, null, function ($constraint) {
@@ -193,12 +193,12 @@ class EmpleadoController extends Controller
         if (request('imagenDniFrente')) {
 
             //borra imagen anterior
-            $url = 'public/'.$empleado->imagenDniFrente;
-            Storage::delete($url);
+            $urlFrente = 'public/'.$empleado->imagenDniFrente;
+            Storage::delete($urlFrente);
             //Carga nueva imagen
             $nombre = Str::random(20).$request->file('imagenDniFrente')->getClientOriginalName();
 
-            $ruta = storage_path().'\app\public\imagenes-dni/'.$nombre;
+            $ruta = storage_path().'/app/public/imagenes-dni/'.$nombre;
 
            Image::make($data['imagenDniFrente'])
             ->resize(500, null, function ($constraint) {
@@ -220,12 +220,12 @@ class EmpleadoController extends Controller
         //si existe una imagen dorso
         if (request('imagenDniDorso')) {
             //borra imagen anterior
-            $url = 'public/'.$empleado->imagenDniDorso;
-            Storage::delete($url);
+            $urlDorso = 'public/'.$empleado->imagenDniDorso;
+            Storage::delete($urlDorso);
             //Carga nueva imagen
             $nombre = Str::random(20).$request->file('imagenDniDorso')->getClientOriginalName();
 
-            $ruta = storage_path().'\app\public\imagenes-dni/'.$nombre;
+            $ruta = storage_path().'/app/public/imagenes-dni/'.$nombre;
 
            Image::make($data['imagenDniDorso'])
             ->resize(500, null, function ($constraint) {
@@ -233,7 +233,7 @@ class EmpleadoController extends Controller
             })
             ->save($ruta);
 
-            $ruta_imagenDniDorso = '\imagenes-dni/'.$nombre;
+            $ruta_imagenDniDorso = '/imagenes-dni/'.$nombre;
 
         } else if (request('imagen_actual_dorso')) {
 
@@ -244,7 +244,7 @@ class EmpleadoController extends Controller
         }
 
 
-         try {
+        try {
             //Actualiza datos
             $empleado->nombre =  $data['nombre'];
             $empleado->apellido = $data['apellido'];
