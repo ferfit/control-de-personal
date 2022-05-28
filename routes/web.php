@@ -5,6 +5,9 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HijoController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PrestamistaController;
+use App\Http\Controllers\PrestamosController;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -46,3 +49,7 @@ Route::post('hijos/{empleado}', [HijoController::class,'store'])->middleware(['a
 Route::get('hijos/{hijo}/{empleado}/edit', [HijoController::class,'edit'])->middleware(['auth','adminSocio'])->name('hijos.edit');
 Route::put('hijos/{hijo}/{empleado}', [HijoController::class,'update'])->middleware(['auth','adminSocio'])->name('hijos.update');
 Route::delete('hijos/{hijo}/{empleado}', [HijoController::class,'destroy'])->middleware(['auth','adminSocio'])->name('hijos.destroy');
+
+
+Route::resource('prestamistas', PrestamistaController::class)->middleware(['auth','adminSocio'])->names('prestamistas');
+Route::resource('prestamos', PrestamoController::class)->middleware(['auth','adminSocio'])->names('prestamos');

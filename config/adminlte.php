@@ -250,6 +250,20 @@ return [
             'label_color' => 'success',
             'can' => ['administrador','socio']
         ],
+        [
+            'text'        => 'Prestamistas',
+            'url'         => 'prestamistas',
+            'icon'        => 'fas fa-user-tie',
+            'label_color' => 'success',
+            'can' => 'administrador'
+        ],
+        [
+            'text'        => 'Prestamos',
+            'url'         => 'prestamos',
+            'icon'        => 'fas fa-user-tie',
+            'label_color' => 'success',
+            'can' => 'administrador'
+        ],
         /* ['header' => 'account_settings'],
         [
             'text' => 'profile',
