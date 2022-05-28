@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHijosTable extends Migration
+class CreatePrestamistasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,15 @@ class CreateHijosTable extends Migration
      */
     public function up()
     {
-        Schema::create('hijos', function (Blueprint $table) {
+        Schema::create('prestamistas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('apellido');
-            $table->string('dni');
-
-            $table->unsignedBigInteger('empleado_id');
-            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
-
+            $table->text('descripcion')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->integer('limiteDiario')->nullable();
+            $table->enum('estado',['activado','desactivado']);
             $table->timestamps();
-
-            
-
         });
     }
 
@@ -36,6 +32,6 @@ class CreateHijosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hijos');
+        Schema::dropIfExists('prestamistas');
     }
 }
