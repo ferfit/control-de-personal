@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Prestamista extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['logo','nombre','whatsapp','limiteDiario','descripcion'];
+
 }

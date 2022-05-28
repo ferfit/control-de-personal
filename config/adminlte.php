@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'title' => 'ControlPersonal',
+    'title' => 'ControlPrestamos',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -46,7 +46,7 @@ return [
     |
     */
 
-    'logo' => '<b>Control</b>PERSONAL',
+    'logo' => '<b>Control</b>PRESTAMOS',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -243,13 +243,13 @@ return [
             'can' => 'administrador'
 
         ],
-        [
+        /* [
             'text'        => 'Empleados',
             'url'         => 'empleados',
             'icon'        => 'fas fa-user-tie',
             'label_color' => 'success',
             'can' => ['administrador','socio']
-        ],
+        ], */
         [
             'text'        => 'Prestamistas',
             'url'         => 'prestamistas',

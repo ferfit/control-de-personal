@@ -14,7 +14,8 @@ class PrestamistaController extends Controller
      */
     public function index()
     {
-        //
+        $prestamistas = Prestamista::paginate(20);
+        return view('admin.prestamistas.index',compact('prestamistas'));
     }
 
     /**
@@ -24,7 +25,7 @@ class PrestamistaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.prestamistas.create');
     }
 
     /**
@@ -35,7 +36,33 @@ class PrestamistaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'logo' => 'nullable',
+            'nombre' => 'required',
+            'whatsapp' => 'required',
+            'limiteDiario' => 'required',
+            'descripcion' => 'nullable',
+        ]);
+
+        $ruta_logo = null;
+
+
+        //Creacion
+        Prestamista::create([
+            'logo' => $ruta_logo,
+            'nombre' => $data['nombre'],
+            'whatsapp' => $data['whatsapp'],
+            'limiteDiario' => $data['limiteDiario'],
+            'descripcion' => $data['descripcion'],
+
+            /* 'imagenDniFrente' => $ruta_imagenDniFrente,
+            'imagenDniDorso' => $ruta_imagenDniDorso,
+ */
+        ]);
+
+        return redirect()->route('prestamistas.index')->with('Creado', 'El prestamista se creó exitosamente.');
+
+
     }
 
     /**
@@ -57,7 +84,7 @@ class PrestamistaController extends Controller
      */
     public function edit(Prestamista $prestamista)
     {
-        //
+        return view('admin.prestamistas.edit',compact('prestamista'));
     }
 
     /**
@@ -69,7 +96,26 @@ class PrestamistaController extends Controller
      */
     public function update(Request $request, Prestamista $prestamista)
     {
-        //
+        $data = request()->validate([
+            'logo' => 'nullable',
+            'nombre' => 'required',
+            'whatsapp' => 'required',
+            'limiteDiario' => 'required',
+            'descripcion' => 'nullable',
+        ]);
+
+        $ruta_logo = null;
+
+        //Actualiza datos
+        $prestamista->logo =  NULL;
+        $prestamista->nombre = $data['nombre'];
+        $prestamista->whatsapp = $data['whatsapp'];
+        $prestamista->limiteDiario = $data['limiteDiario'];
+        $prestamista->descripcion = $data['descripcion'];
+        $prestamista->save();
+
+        return redirect()->route('prestamistas.index')->with('Actualizado', 'Datos del prestamista actualizados exitosamente.');
+
     }
 
     /**
@@ -80,6 +126,9 @@ class PrestamistaController extends Controller
      */
     public function destroy(Prestamista $prestamista)
     {
-        //
+        $prestamista->delete();
+
+        return redirect()->route('prestamistas.index')->with('Borrado', 'Empleado borrado exitosamente.');
+
     }
 }
