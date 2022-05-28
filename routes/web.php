@@ -46,3 +46,5 @@ Route::post('hijos/{empleado}', [HijoController::class,'store'])->middleware(['a
 Route::get('hijos/{hijo}/{empleado}/edit', [HijoController::class,'edit'])->middleware(['auth','adminSocio'])->name('hijos.edit');
 Route::put('hijos/{hijo}/{empleado}', [HijoController::class,'update'])->middleware(['auth','adminSocio'])->name('hijos.update');
 Route::delete('hijos/{hijo}/{empleado}', [HijoController::class,'destroy'])->middleware(['auth','adminSocio'])->name('hijos.destroy');
+
+Route::resource('prestamistas', EmpleadoController::class)->middleware(['auth'])->names('prestamistas');
