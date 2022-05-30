@@ -11,4 +11,10 @@ class Prestamista extends Model
 
     protected $fillable = ['logo','nombre','whatsapp','limiteDiario','descripcion'];
 
+
+    public function prestamos()
+    {
+        return $this->hasMany(Prestamo::class);
+    }
+
 }

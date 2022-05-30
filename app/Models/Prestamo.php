@@ -9,4 +9,12 @@ class Prestamo extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['titulo','descripcion','monto','prestamista_id'];
+
+
+    public function prestamista()
+    {
+        return $this->belongsTo(Prestamista::class);
+    }
+
 }

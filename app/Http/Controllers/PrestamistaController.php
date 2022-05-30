@@ -128,7 +128,7 @@ class PrestamistaController extends Controller
     {
         $prestamista->delete();
 
-        return redirect()->route('prestamistas.index')->with('Borrado', 'Empleado borrado exitosamente.');
+        return redirect()->route('prestamistas.index')->with('Borrado', 'Prestamista borrado exitosamente.');
 
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prestamista;
 use App\Models\Prestamo;
 use Illuminate\Http\Request;
+
 
 class PrestamoController extends Controller
 {
@@ -14,7 +16,8 @@ class PrestamoController extends Controller
      */
     public function index()
     {
-        //
+        $prestamos = Prestamo::paginate(20);
+        return view('admin.prestamos.index',compact('prestamos'));
     }
 
     /**
@@ -24,7 +27,8 @@ class PrestamoController extends Controller
      */
     public function create()
     {
-        //
+        $prestamistas = Prestamista::all();
+        return view('admin.prestamos.create',compact('prestamistas'));
     }
 
     /**
@@ -35,7 +39,24 @@ class PrestamoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'titulo' => 'required',
+            'descripcion' => 'nullable',
+            'monto' => 'required',
+            'prestamista' => 'required'
+        ]);
+
+
+        //Creacion
+        Prestamo::create([
+            'titulo' => $data['titulo'],
+            'descripcion' => $data['descripcion'],
+            'monto' => $data['monto'],
+            'prestamista_id' => $data['prestamista'],
+
+        ]);
+
+        return redirect()->route('prestamos.index')->with('Creado', 'El prestamo se creó exitosamente.');
     }
 
     /**
@@ -57,7 +78,9 @@ class PrestamoController extends Controller
      */
     public function edit(Prestamo $prestamo)
     {
-        //
+        $prestamistas = Prestamista::all();
+
+        return view('admin.prestamos.edit',compact('prestamistas','prestamo'));
     }
 
     /**
@@ -69,7 +92,22 @@ class PrestamoController extends Controller
      */
     public function update(Request $request, Prestamo $prestamo)
     {
-        //
+        $data = request()->validate([
+            'titulo' => 'required',
+            'descripcion' => 'nullable',
+            'monto' => 'required',
+            'prestamista' => 'required'
+        ]);
+
+        //Actualiza datos
+        $prestamo->titulo = $data['titulo'];
+        $prestamo->descripcion = $data['descripcion'];
+        $prestamo->monto = $data['monto'];
+        $prestamo->prestamista_id = $data['prestamista'];
+        $prestamo->save();
+
+        return redirect()->route('prestamistas.index')->with('Actualizado', 'Datos del prestamo actualizados exitosamente.');
+
     }
 
     /**
@@ -80,6 +118,9 @@ class PrestamoController extends Controller
      */
     public function destroy(Prestamo $prestamo)
     {
-        //
+        $prestamo->delete();
+
+        return redirect()->route('prestamos.index')->with('Borrado', 'Prestamo borrado exitosamente.');
+
     }
 }

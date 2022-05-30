@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HijoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PrestamistaController;
-use App\Http\Controllers\PrestamosController;
+use App\Http\Controllers\PrestamoController;
 
 use Illuminate\Support\Facades\Auth;
 

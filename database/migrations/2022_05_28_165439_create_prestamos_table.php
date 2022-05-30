@@ -16,15 +16,14 @@ class CreatePrestamosTable extends Migration
         Schema::create('prestamos', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->text('descripcion');
+            $table->text('descripcion')->nullable();
             $table->string('monto');
             $table->enum('estado',['activado','desactivado']);
-
             $table->unsignedBigInteger('prestamista_id');
-            $table->foreign('prestamista_id')->references('id')->on('prestamistas');
-
+            $table->foreign('prestamista_id')->references('id')->on('prestamistas')->onDelete('cascade');
             $table->timestamps();
         });
+
     }
 
     /**
