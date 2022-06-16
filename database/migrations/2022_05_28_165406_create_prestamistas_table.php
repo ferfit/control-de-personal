@@ -22,6 +22,7 @@ class CreatePrestamistasTable extends Migration
             $table->integer('limiteDiario')->nullable();
             $table->enum('estado',['activado','desactivado']);
             $table->timestamps();
+            /*provincia, ciudad, telefono de contacto, email, direccion,sucursales,tipo de operacion (virtual, fisico), cuit*/
         });
     }
 
