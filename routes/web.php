@@ -7,6 +7,7 @@ use App\Http\Controllers\HijoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PrestamistaController;
 use App\Http\Controllers\PrestamoController;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
 
